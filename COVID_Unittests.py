@@ -22,13 +22,6 @@ class COVID_UnitTests(unittest.TestCase):
 
 # Unittests for generate_url_list:
 
-    #Warum funktioniert diese Version nicht? Die nächste aber schon? 
-    # def test_generate_url_list_no_http(self):
-    #     with self.assertRaises(SystemExit) as cm:
-    #         for i in generate_url_list("www.google.de/", start=0,end=0):
-    #             print(i)
-    #     self.assertEqual(cm.exception.code, 1) 
-
     def test_generate_url_list_not_http(self):
         with self.assertRaises(SystemExit) as cm:
             next(generate_url_list("www.google.de/{}", start=0, end=0))
@@ -92,7 +85,6 @@ class COVID_UnitTests(unittest.TestCase):
             call_archiv(wrong_path)
         self.assertEqual(cm.exception.code, 1)
 
-    #TODO: Mock? 
     def test_call_archiv(self):
         self.assertTrue(call_archiv(path))
 
@@ -109,7 +101,6 @@ class COVID_UnitTests(unittest.TestCase):
             divi_csv_analyser(csv_testlist, 1)
         self.assertEqual(cm.exception.code, 1)
     
-    # TODO: Mock?
     def test_divi_csv_analyser(self):
         self.assertTrue(divi_csv_analyser(csv_testlist, "faelle_covid_aktuell"))
 
@@ -121,14 +112,10 @@ class COVID_UnitTests(unittest.TestCase):
         self.assertEqual(cm.exception.code, 1)
 
     # There is no current unitests to check the actual plot function
-
-# Unittests for COVID_DIVI_crawler:
-
-    #TODO: Mocks? 
+ 
 
 # Unittests for COVID_DIVI_analyzer:
 
-    #TODO: Mock?
     def test_divi_analysis(self):
         self.assertEqual(divi_analysis("faelle_covid_aktuell"), plt.show())
 
