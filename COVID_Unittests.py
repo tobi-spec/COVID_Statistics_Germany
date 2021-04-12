@@ -1,7 +1,7 @@
 import unittest
 import pathlib
 from COVID_DIVI_analyzer import call_archiv, csv_sum_columnes
-from COVID_DIVI_crawler import download_csv
+from COVID_DIVI_scraper import download_csv
 
 
 # TODO: pathlib
@@ -10,9 +10,6 @@ wrong_path = pathlib.Path(".\\data\\DIVI_data123\\")
 csv_testlist = [pathlib.Path(".\\data\\test_data\\DIVI-testfile.csv")]
 txt_testlist = [pathlib.Path(".\\data\\test_data\\DIVI-testfile.txt")]
 path = pathlib.Path(".\\data\\DIVI_data\\")
-
-
-
 
 
 

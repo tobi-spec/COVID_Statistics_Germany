@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-from os import listdir
+import os
 import requests
 import pathlib
 import csv
@@ -60,12 +60,16 @@ def download_csv(csv_dict):
         print("csv files must be passed to function as dict")
         sys.exit(1)
 
+    if not os.path.exists(download_path):
+        os.mkdir(download_path)
+
+
     for key, value in csv_dict.items(): 
         download_link = urljoin(divi, value)
         response = requests.get(download_link)
         file_path = f"{download_path}/{key}.csv"
         
-        if f"{key}.csv" not in listdir(download_path):
+        if f"{key}.csv" not in os.listdir(download_path):
             print(f"New file downloaded: {key}")
             with open(pathlib.Path(file_path), 'w', newline='') as file:
                 file.write(response.text)
