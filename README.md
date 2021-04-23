@@ -6,7 +6,7 @@
 install requirements.txt  
 run COVID_scraper.py  
 run COVID_analyzer.py  
-A chart with the coruses of daily infections, occupancy od intensiv care untits and daily deaths will occure
+A chart with the coruses of daily infections, occupancy od intensiv care untits and daily deaths will occure.
 All data refers to the COVID-19 pandamic in germany
   
 -------------------------  
