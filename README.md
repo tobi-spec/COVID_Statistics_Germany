@@ -22,4 +22,4 @@ Unittests for testing the program functionalities are also to find in COVID_unit
 - change minor misscalculations in new infections and new deaths
 - implement input() function to create console commands 
 - create more plots :) 
-- switche from Beautifulsoup library to scrapy framework for faster scrapy  
+- switche from Beautifulsoup library to scrapy framework for faster scrape  
