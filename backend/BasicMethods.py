@@ -3,8 +3,8 @@ import sys
 from os import listdir
 from urllib.parse import urljoin, urlsplit, urlunsplit
 from pathlib import Path
-import requests
 from bs4 import BeautifulSoup
+import requests
 
 
 def get_archive(url):
