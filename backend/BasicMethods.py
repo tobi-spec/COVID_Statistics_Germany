@@ -1,4 +1,6 @@
 import os
+import sys
+from os import listdir
 from urllib.parse import urljoin, urlsplit, urlunsplit
 from pathlib import Path
 import requests
@@ -57,3 +59,16 @@ def save_csv(directory, link):
     response = requests.get(link)
     with open(Path(directory), 'w', encoding="utf-8", newline='') as file:
         file.write(response.text)
+
+
+def call_archiv(path):
+    if not os.path.exists(path):
+        print("call_archive: path doesn't exists")
+        sys.exit(1)
+
+    list_of_files = []
+    for element in listdir(path):
+        data = path / element
+        list_of_files.append(str(data))
+
+    return list_of_files
