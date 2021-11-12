@@ -14,9 +14,11 @@ RKI.fetch allows the download of the whole file, saved in a seperated folder (./
 def fetch():
     url = "https://www.arcgis.com/sharing/rest/content/items/f10774f1c63e40168479a1feb6c7ca74/data"
     directory = Path("./data/rki/")
+    BasicMethods.create_directory(directory)
     print("this will need a while...")
     BasicMethods.save_csv(directory, url)
     print("Finished!")
+    return "Finished"
 
 
 def rki_data():

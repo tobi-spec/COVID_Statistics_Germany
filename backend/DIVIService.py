@@ -31,7 +31,7 @@ def fetch():
     archive_links = []
 
     print("scrape archive...")
-    archive = BasicMethods.get_archive()
+    archive = BasicMethods.get_archive(url)
 
     print("scrape links...")
     for site in archive:
