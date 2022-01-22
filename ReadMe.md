@@ -1,13 +1,5 @@
 ﻿ 
 ### Modelling of COVID-19 epidemiological data in Germany
-
-### run server ###
-to run server:
-
-$ export FLASK_APP=FetchController.py
-$ export FLASK_ENV=development
-$ flask run
--------------------------
   
 This programm contains a scraper which downloads all daily report files about the COVID-19 pandamic provided by the Robert-Koch-Institut (RKI) (www.rki.de)
 Data is stored in a csv file provided by RKI (https://www.arcgis.com/home/item.html?id=f10774f1c63e40168479a1feb6c7ca74)
