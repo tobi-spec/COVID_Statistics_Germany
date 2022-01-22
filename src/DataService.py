@@ -67,7 +67,7 @@ def rki_data():
         rows are grouped per week
         values are returned
     """
-    directory = Path("Data/rki/")
+    directory = Path("data/rki/")
 
     df = pd.read_csv(directory)
 

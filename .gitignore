@@ -1,7 +1,7 @@
 *.idea
 *.iml
 *.DS_STORE
-src/Data/
+src/data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
