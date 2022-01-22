@@ -4,7 +4,6 @@ from os import listdir
 from pathlib import Path
 import pandas as pd
 
-
 '''
 DIVI.data: Daily reports are seperated into reporting countys. These will be summerize to german wide daily values.
          All Daily values are gathered into a pandas.dataframe.
@@ -20,6 +19,7 @@ pandas.dataframe contains following columnes:
             'IstErkrankungsbeginn'
 '''
 
+
 def divi_data():
     directory = "./data/divi_data/"
 
@@ -34,7 +34,7 @@ def divi_data():
             print(f"{csv_file} is not csv file")
             sys.exit(1)
 
-        df= pd.read_csv(csv_file)
+        df = pd.read_csv(csv_file)
 
         if 'daten_stand' in df.columns:
             df['daten_stand'] = pd.to_datetime(df['daten_stand'])
@@ -44,9 +44,9 @@ def divi_data():
             df_clean = df_sum.drop(['bundesland',
                                     'gemeindeschluessel',
                                     'anzahl_meldebereiche',
-                                    "anzahl_standorte",],
-                                    axis=1)
-            df_clean = df_clean.rename(columns={"faelle_covid_aktuell_beatmet":"faelle_covid_aktuell_invasiv_beatmet"})
+                                    "anzahl_standorte", ],
+                                   axis=1)
+            df_clean = df_clean.rename(columns={"faelle_covid_aktuell_beatmet": "faelle_covid_aktuell_invasiv_beatmet"})
             daily_dataframes.append(df_clean)
 
         else:
@@ -59,29 +59,29 @@ def divi_data():
 
 
 def rki_data():
-        '''
+    """
         Function opens csv with all daily reports of rki covid data
         values of colume "Meldedatum" are converted into pandas datetime objects
         colume "Meldedatum" is set as index
         rows are grouped by "Meldedatum" index
         rows are grouped per week
         values are returned
-        '''
-        directory = Path("./data/rki/")
+    """
+    directory = Path("Data/rki/")
 
-        df = pd.read_csv(directory)
+    df = pd.read_csv(directory)
 
-        df["Meldedatum"] = pd.to_datetime(df["Meldedatum"])
-        df_index = df.set_index("Meldedatum")
-        df_sum = df_index.groupby(by="Meldedatum").sum()
-        df_weekly = df_sum.resample('w').sum()
-        df_rki = df_weekly
-        df_rki = df_weekly.drop(['FID',
-                                 'IdBundesland',
-                                 'IdLandkreis'],
-                                axis=1)
-        print(df_rki)
-        return df_rki
+    df["Meldedatum"] = pd.to_datetime(df["Meldedatum"])
+    df_index = df.set_index("Meldedatum")
+    df_sum = df_index.groupby(by="Meldedatum").sum()
+    df_weekly = df_sum.resample('w').sum()
+    df_rki = df_weekly
+    df_rki = df_weekly.drop(['FID',
+                             'IdBundesland',
+                             'IdLandkreis'],
+                            axis=1)
+    print(df_rki)
+    return df_rki
 
 
 def call_archiv(path):

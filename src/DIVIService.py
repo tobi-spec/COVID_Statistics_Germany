@@ -24,7 +24,7 @@ pandas.dataframe contains following columnes:
 def fetch():
     url = "https://www.divi.de/divi-intensivregister-tagesreport-archiv-csv?layout=table&start=0"
     attribute = "aria-label"
-    directory = Path("./data/divi_data/")
+    directory = Path("src/Data/divi_data/")
 
     archive_links = []
 
