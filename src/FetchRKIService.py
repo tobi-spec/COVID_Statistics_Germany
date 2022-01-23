@@ -12,6 +12,9 @@ All data is gathereed into a single csv file, which makes the file very large (>
 def fetch():
     url = "https://www.arcgis.com/sharing/rest/content/items/f10774f1c63e40168479a1feb6c7ca74/data"
     directory = Path("./data/raw/rki.csv")
+
+    if not os.path.isdir("./data/raw"):
+        create_directory("./data/raw")
     print("this will need a while...")
     save_csv(directory, url)
     print("Finished!")
