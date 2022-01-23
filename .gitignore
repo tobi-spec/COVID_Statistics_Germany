@@ -2,6 +2,7 @@
 *.iml
 *.DS_STORE
 src/data/
+test/_trial_temp
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
