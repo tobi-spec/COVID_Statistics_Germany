@@ -1,6 +1,21 @@
+import os
+import sys
 from urllib.parse import urljoin, urlsplit, urlunsplit
 import requests
 from bs4 import BeautifulSoup
+
+
+def call_archiv(path):
+    if not os.path.exists(path):
+        print("call_archive: path doesn't exists")
+        sys.exit(1)
+
+    list_of_files = []
+    for element in os.listdir(path):
+        data = path / element
+        list_of_files.append(str(data))
+
+    return list_of_files
 
 
 def get_archive(url):

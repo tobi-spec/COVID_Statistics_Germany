@@ -30,17 +30,5 @@ def rki_data():
     return df_rki
 
 
-def call_archiv(path):
-    if not os.path.exists(path):
-        print("call_archive: path doesn't exists")
-        sys.exit(1)
-
-    list_of_files = []
-    for element in listdir(path):
-        data = path / element
-        list_of_files.append(str(data))
-
-    return list_of_files
-
 if __name__ == "__main__":
     rki_data()
