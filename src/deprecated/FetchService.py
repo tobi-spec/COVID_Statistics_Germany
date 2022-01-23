@@ -1,6 +1,4 @@
-import os
 from urllib.parse import urljoin, urlsplit, urlunsplit
-from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
@@ -47,13 +45,4 @@ def merge_link_with_base(url, link):
     return url
 
 
-def create_directory(directory):
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-    return directory
 
-
-def save_csv(directory, link):
-    response = requests.get(link)
-    with open(Path(directory), 'w', encoding="utf-8", newline='') as file:
-        file.write(response.text)

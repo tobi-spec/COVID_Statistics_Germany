@@ -1,4 +1,4 @@
-import FetchService
+from src.deprecated import FetchService
 from pathlib import Path
 
 '''
@@ -17,6 +17,17 @@ def fetch():
     FetchService.save_csv(directory, url)
     print("Finished!")
 
+
+def create_directory(directory):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    return directory
+
+
+def save_csv(directory, link):
+    response = requests.get(link)
+    with open(Path(directory), 'w', encoding="utf-8", newline='') as file:
+        file.write(response.text)
 
 if __name__ == "__main__":
     fetch()
