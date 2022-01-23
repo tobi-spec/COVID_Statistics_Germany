@@ -1,4 +1,5 @@
-from src.deprecated import FetchService
+import os
+import requests
 from pathlib import Path
 
 '''
@@ -14,7 +15,7 @@ def fetch():
     url = "https://www.arcgis.com/sharing/rest/content/items/f10774f1c63e40168479a1feb6c7ca74/data"
     directory = Path("data/rki")
     print("this will need a while...")
-    FetchService.save_csv(directory, url)
+    save_csv(directory, url)
     print("Finished!")
 
 
@@ -28,6 +29,7 @@ def save_csv(directory, link):
     response = requests.get(link)
     with open(Path(directory), 'w', encoding="utf-8", newline='') as file:
         file.write(response.text)
+
 
 if __name__ == "__main__":
     fetch()
