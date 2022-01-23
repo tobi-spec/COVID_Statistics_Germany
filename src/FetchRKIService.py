@@ -1,4 +1,6 @@
 import os
+import sys
+
 import requests
 from pathlib import Path
 
@@ -26,10 +28,19 @@ def create_directory(directory):
     return directory
 
 
-def save_csv(directory, link):
-    response = requests.get(link)
+def fetch_csv(link):
+    try:
+        response = requests.get(link)
+        return response.text
+    except Exception as e:
+        raise SystemExit(e)
+
+
+def save_csv(directory, string):
+    if not isinstance(string, str):
+        sys.exit("only strings can saved in csv")
     with open(Path(directory), 'w', encoding="utf-8", newline='') as file:
-        file.write(response.text)
+        file.write(string)
 
 
 if __name__ == "__main__":
