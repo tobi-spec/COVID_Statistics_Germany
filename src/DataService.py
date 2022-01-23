@@ -4,59 +4,6 @@ from os import listdir
 from pathlib import Path
 import pandas as pd
 
-'''
-DIVI.data: Daily reports are seperated into reporting countys. These will be summerize to german wide daily values.
-         All Daily values are gathered into a pandas.dataframe.
-
-RKI.data ,the data is seperated into different reporting offices, so the data is summarize to weekly values
-pandas.dataframe contains following columnes:
-            'AnzahlFall',
-            'AnzahlTodesfall',
-            'NeuerFall',
-            'NeuerTodesfall',
-            'NeuGenesen',
-            'AnzahlGenesen',
-            'IstErkrankungsbeginn'
-'''
-
-
-def divi_data():
-    directory = "./data/divi_data/"
-
-    path = Path(directory)
-    csv_files = call_archiv(path)
-    daily_dataframes = []
-
-    for csv_file in csv_files:
-
-        csv_tester = str(csv_file)
-        if not csv_tester.endswith("csv"):
-            print(f"{csv_file} is not csv file")
-            sys.exit(1)
-
-        df = pd.read_csv(csv_file)
-
-        if 'daten_stand' in df.columns:
-            df['daten_stand'] = pd.to_datetime(df['daten_stand'])
-            df['daten_stand'] = df['daten_stand'].dt.date
-            df_index = df.set_index('daten_stand')
-            df_sum = df_index.groupby(by='daten_stand').sum()
-            df_clean = df_sum.drop(['bundesland',
-                                    'gemeindeschluessel',
-                                    'anzahl_meldebereiche',
-                                    "anzahl_standorte", ],
-                                   axis=1)
-            df_clean = df_clean.rename(columns={"faelle_covid_aktuell_beatmet": "faelle_covid_aktuell_invasiv_beatmet"})
-            daily_dataframes.append(df_clean)
-
-        else:
-            print(f"Tagesdaten von {csv_file} werden nicht erfasst")
-
-    df_divi = pd.concat(daily_dataframes)
-    print(df_divi)
-
-    return df_divi
-
 
 def rki_data():
     """
@@ -64,10 +11,9 @@ def rki_data():
         values of colume "Meldedatum" are converted into pandas datetime objects
         colume "Meldedatum" is set as index
         rows are grouped by "Meldedatum" index
-        rows are grouped per week
-        values are returned
+        rows are grouped by week
     """
-    directory = Path("data/rki/")
+    directory = Path("data/rki/RKI_COVID19.csv")
 
     df = pd.read_csv(directory)
 
@@ -95,3 +41,6 @@ def call_archiv(path):
         list_of_files.append(str(data))
 
     return list_of_files
+
+if __name__ == "__main__":
+    rki_data()
