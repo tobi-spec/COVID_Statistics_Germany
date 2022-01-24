@@ -13,19 +13,23 @@ All data is gathereed into a single csv file, which makes the file very large (>
 
 def fetch():
     url = "https://www.arcgis.com/sharing/rest/content/items/f10774f1c63e40168479a1feb6c7ca74/data"
-    directory = Path("./data/raw/rki.csv")
+    directory = Path("./data/raw/")
+    filename = "rki.csv"
 
     if not os.path.isdir("./data/raw"):
         create_directory("./data/raw")
     print("this will need a while...")
-    save_csv(directory, url)
+    save_csv(directory, filename, url)
     print("Finished!")
 
 
 def create_directory(directory):
-    if not os.path.exists(directory):
+    if not isinstance(directory, str):
+        sys.exit("directory must be string")
+    try:
         os.makedirs(directory)
-    return directory
+    except Exception as e:
+        print(e)
 
 
 def fetch_csv(link):

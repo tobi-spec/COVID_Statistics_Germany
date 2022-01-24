@@ -13,7 +13,11 @@ class FetchRKIServiceTest(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree("./testdata")
 
-    # test_create_directory_no_string
+    def test_create_directory_no_string(self):
+        test_directory = 1
+        with self.assertRaises(SystemExit) as cm:
+            FetchRKIService.create_directory(test_directory)
+        self.assertEqual(cm.exception.code, "directory must be string")
 
     def test_create_directory(self):
         test_directory = "./testdata/test"
