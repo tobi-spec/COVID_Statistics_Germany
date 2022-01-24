@@ -36,10 +36,16 @@ def fetch_csv(link):
         raise SystemExit(e)
 
 
-def save_csv(directory, string):
+def save_csv(directory, filename, string):
+    if not os.path.exists(directory):
+        sys.exit("directory does not exist")
+    if not isinstance(filename, str):
+        sys.exit("filename must be string")
+    if not filename.endswith(".csv"):
+        sys.exit("filename must end with .csv")
     if not isinstance(string, str):
         sys.exit("only strings can saved in csv")
-    with open(Path(directory), 'w', encoding="utf-8", newline='') as file:
+    with open(Path(directory+filename), 'w', encoding="utf-8", newline='') as file:
         file.write(string)
 
 
