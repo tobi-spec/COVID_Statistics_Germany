@@ -47,7 +47,8 @@ if __name__ == "__main__":
     url = "https://www.arcgis.com/sharing/rest/content/items/f10774f1c63e40168479a1feb6c7ca74/data"
     directory = "./data/raw/"
     filename = "rki.csv"
-    create_directory("./data/raw")
     print("this will need a while...")
-    save_csv(directory, filename, url)
-    print("Finished!")
+    create_directory("./data/raw")
+    content = fetch_csv(url)
+    save_csv(directory, filename, content)
+    print(f"Finished! with {filename}")
