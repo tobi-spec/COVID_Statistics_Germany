@@ -11,25 +11,14 @@ All data is gathereed into a single csv file, which makes the file very large (>
 '''
 
 
-def fetch():
-    url = "https://www.arcgis.com/sharing/rest/content/items/f10774f1c63e40168479a1feb6c7ca74/data"
-    directory = Path("./data/raw/")
-    filename = "rki.csv"
-
-    if not os.path.isdir("./data/raw"):
-        create_directory("./data/raw")
-    print("this will need a while...")
-    save_csv(directory, filename, url)
-    print("Finished!")
-
-
 def create_directory(directory):
     if not isinstance(directory, str):
         sys.exit("directory must be string")
-    try:
-        os.makedirs(directory)
-    except Exception as e:
-        print(e)
+    universal_directory = Path(directory)
+    if not os.path.isdir(universal_directory):
+        os.makedirs(universal_directory)
+    else:
+        return "directory already exists"
 
 
 def fetch_csv(link):
@@ -49,9 +38,16 @@ def save_csv(directory, filename, string):
         sys.exit("filename must end with .csv")
     if not isinstance(string, str):
         sys.exit("only strings can saved in csv")
-    with open(Path(directory+filename), 'w', encoding="utf-8", newline='') as file:
+    directory = Path(directory)
+    with open(Path(directory / filename), 'w', encoding="utf-8", newline='') as file:
         file.write(string)
 
 
 if __name__ == "__main__":
-    fetch()
+    url = "https://www.arcgis.com/sharing/rest/content/items/f10774f1c63e40168479a1feb6c7ca74/data"
+    directory = "./data/raw/"
+    filename = "rki.csv"
+    create_directory("./data/raw")
+    print("this will need a while...")
+    save_csv(directory, filename, url)
+    print("Finished!")
