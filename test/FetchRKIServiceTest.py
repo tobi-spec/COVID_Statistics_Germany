@@ -24,6 +24,11 @@ class FetchRKIServiceTest(unittest.TestCase):
         FetchRKIService.create_directory(test_directory)
         self.assertTrue(os.path.exists("testdata/test"))
 
+    def test_create_directory_exist(self):
+        test_directory = "./testdata"
+        actual = FetchRKIService.create_directory(test_directory)
+        self.assertEqual("directory already exists", actual)
+
     def test_fetch_csv(self):
         test_link = "https://sample-videos.com/csv/Sample-Spreadsheet-10-rows.csv"
         actual = FetchRKIService.fetch_csv(test_link)
